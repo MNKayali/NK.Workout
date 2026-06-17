@@ -19,6 +19,7 @@ export const EXERCISES = {
     groups: ['chest', 'arms', 'shoulders'],
     regions: ['chest', 'triceps', 'shoulders'],
     swaps: ['incline_db', 'pec_dec', 'smith_press', 'cable_fly'],
+    tip: 'Flat back on bench, lower dumbbells to chest level, then press up and slightly inward.',
   },
   incline_db: {
     id: 'incline_db',
@@ -33,6 +34,7 @@ export const EXERCISES = {
     groups: ['chest', 'shoulders', 'arms'],
     regions: ['chest', 'shoulders', 'triceps'],
     swaps: ['db_chest_press', 'pec_dec', 'smith_press'],
+    tip: 'Bench at 30–45°. Press from shoulder height up and inward — targets the upper chest.',
   },
   overhead_press: {
     id: 'overhead_press',
@@ -47,6 +49,7 @@ export const EXERCISES = {
     groups: ['shoulders', 'arms'],
     regions: ['shoulders', 'triceps'],
     swaps: ['lateral_raise'],
+    tip: 'Sit upright, press handles from shoulder height straight overhead. Avoid arching your back.',
   },
   pec_dec: {
     id: 'pec_dec',
@@ -61,6 +64,7 @@ export const EXERCISES = {
     groups: ['chest'],
     regions: ['chest'],
     swaps: ['cable_fly', 'db_chest_press', 'incline_db'],
+    tip: 'Elbows at shoulder height, round arms forward and squeeze your chest hard at the midpoint.',
   },
   lateral_raise: {
     id: 'lateral_raise',
@@ -75,6 +79,7 @@ export const EXERCISES = {
     groups: ['shoulders'],
     regions: ['shoulders'],
     swaps: ['overhead_press'],
+    tip: 'Slight bend in elbows, raise dumbbells out to sides until arms are parallel to the floor.',
   },
   tricep_pushdown: {
     id: 'tricep_pushdown',
@@ -89,6 +94,7 @@ export const EXERCISES = {
     groups: ['arms'],
     regions: ['triceps'],
     swaps: [],
+    tip: 'Elbows pinned to your sides, push the rope down until arms are fully straight, then squeeze.',
   },
 
   // ---- Pull ----
@@ -105,6 +111,7 @@ export const EXERCISES = {
     groups: ['back', 'arms'],
     regions: ['lats', 'biceps'],
     swaps: ['seated_row', 'db_row'],
+    tip: 'Wide overhand grip, lean slightly back, pull bar to upper chest driving elbows down and back.',
   },
   seated_row: {
     id: 'seated_row',
@@ -119,6 +126,7 @@ export const EXERCISES = {
     groups: ['back', 'arms'],
     regions: ['lats', 'traps', 'biceps'],
     swaps: ['lat_pulldown', 'db_row'],
+    tip: 'Sit tall, pull the handle to your navel and squeeze your shoulder blades together at the end.',
   },
   db_row: {
     id: 'db_row',
@@ -133,6 +141,7 @@ export const EXERCISES = {
     groups: ['back', 'arms'],
     regions: ['lats', 'traps', 'biceps'],
     swaps: ['seated_row', 'lat_pulldown'],
+    tip: 'One hand and knee on the bench, pull dumbbell to your hip keeping your elbow close to your body.',
   },
   db_curl: {
     id: 'db_curl',
@@ -147,6 +156,7 @@ export const EXERCISES = {
     groups: ['arms'],
     regions: ['biceps'],
     swaps: ['preacher_curl'],
+    tip: 'Stand tall, curl both dumbbells up keeping your upper arms still and elbows pinned to your sides.',
   },
   preacher_curl: {
     id: 'preacher_curl',
@@ -161,6 +171,7 @@ export const EXERCISES = {
     groups: ['arms'],
     regions: ['biceps'],
     swaps: ['db_curl'],
+    tip: 'Arms fully over the pad, curl up slowly then lower all the way down for maximum stretch.',
   },
 
   // ---- Legs + Core ----
@@ -178,6 +189,7 @@ export const EXERCISES = {
     regions: ['quads', 'glutes', 'hamstrings'],
     note: { tone: 'warn', text: 'Feet high — protects knees' },
     swaps: ['leg_ext'],
+    tip: 'Place feet high and wide on the plate. Press through your heels to near-full extension — easier on knees.',
   },
   leg_curl: {
     id: 'leg_curl',
@@ -193,6 +205,7 @@ export const EXERCISES = {
     regions: ['hamstrings'],
     note: { tone: 'safe', text: 'Knee-safe' },
     swaps: [],
+    tip: 'Adjust the pad above your heels, curl toward your glutes and squeeze at the top before lowering slowly.',
   },
   leg_ext: {
     id: 'leg_ext',
@@ -208,6 +221,7 @@ export const EXERCISES = {
     regions: ['quads'],
     note: { tone: 'warn', text: 'Light only' },
     swaps: ['leg_press'],
+    tip: 'Extend legs to horizontal only — avoid fully locking the knee. Squeeze quads at the top.',
   },
   ball_crunch: {
     id: 'ball_crunch',
@@ -223,6 +237,7 @@ export const EXERCISES = {
     groups: ['core'],
     regions: ['abs'],
     swaps: ['cable_crunch'],
+    tip: 'Lower back on the ball, hands lightly behind head. Crunch up and squeeze your abs at the top.',
   },
   cable_crunch: {
     id: 'cable_crunch',
@@ -237,6 +252,7 @@ export const EXERCISES = {
     groups: ['core'],
     regions: ['abs', 'obliques'],
     swaps: ['ball_crunch'],
+    tip: 'Kneel, hold rope to forehead, curl your torso down bringing elbows toward your thighs.',
   },
   arc: {
     id: 'arc',
@@ -252,6 +268,7 @@ export const EXERCISES = {
     groups: ['legs'],
     regions: ['quads', 'hamstrings', 'calves'],
     swaps: [],
+    tip: 'Set resistance and incline. Stay upright and drive through the full low-impact stride.',
   },
 
   // ---- Swap-only alternatives ----
@@ -268,6 +285,7 @@ export const EXERCISES = {
     groups: ['chest', 'arms', 'shoulders'],
     regions: ['chest', 'triceps', 'shoulders'],
     swaps: ['db_chest_press', 'pec_dec', 'cable_fly'],
+    tip: 'Lie on the bench, unrack the bar and lower to mid-chest. Press up in a controlled arc.',
   },
   cable_fly: {
     id: 'cable_fly',
@@ -282,6 +300,7 @@ export const EXERCISES = {
     groups: ['chest'],
     regions: ['chest'],
     swaps: ['pec_dec', 'db_chest_press'],
+    tip: 'Stand between cables, arms slightly bent, bring hands together at chest height squeezing your pecs.',
   },
 }
 

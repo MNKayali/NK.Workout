@@ -12,7 +12,7 @@ export default function App() {
   const hideNav = pathname.startsWith('/workout')
 
   return (
-    <div className="mx-auto min-h-full max-w-md bg-canvas">
+    <div className={`mx-auto min-h-full max-w-md bg-canvas${!hideNav ? ' pt-[env(safe-area-inset-top)]' : ''}`}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/workout/:type" element={<Workout />} />
@@ -22,7 +22,7 @@ export default function App() {
         <Route path="/session/:id" element={<SessionDetail />} />
         <Route path="*" element={<Home />} />
       </Routes>
-      {!hideNav && <div className="h-20" aria-hidden />}
+      {!hideNav && <div className="h-[calc(5rem+env(safe-area-inset-bottom))]" aria-hidden />}
       {!hideNav && <BottomNav />}
     </div>
   )

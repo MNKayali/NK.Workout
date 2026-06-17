@@ -28,7 +28,7 @@ export default function SessionDetail() {
   }
 
   return (
-    <div className="px-4 pt-12 pb-8">
+    <div className="px-4 pt-5 pb-8">
       <button onClick={() => navigate(-1)} className="mb-3 text-sm font-semibold text-blue">‹ Back</button>
 
       <header className="mb-5 flex items-center gap-3">
