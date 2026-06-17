@@ -23,7 +23,7 @@ export default function Progress() {
   const ordered = [...sessions].sort((a, b) => new Date(b.date) - new Date(a.date))
 
   return (
-    <div className="px-4 pt-12">
+    <div className="px-4 pt-5">
       <h1 className="mb-4 text-[28px] font-extrabold">Progress</h1>
 
       <Card className="mb-5 p-4">

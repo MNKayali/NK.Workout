@@ -26,7 +26,7 @@ export default function Muscles() {
   }
 
   return (
-    <div className="px-4 pt-12">
+    <div className="px-4 pt-5">
       <h1 className="mb-4 text-[28px] font-extrabold">Muscles</h1>
 
       <Card className="mb-5 p-4">

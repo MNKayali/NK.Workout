@@ -30,6 +30,10 @@ export default function ExerciseCard({ entry, exIndex, onSetChange, onSwap }) {
           </div>
           <p className="mt-0.5 truncate text-xs text-ink-soft">{ex.machine}</p>
 
+          {ex.tip && (
+            <p className="mt-1.5 text-xs leading-snug text-ink-soft">{ex.tip}</p>
+          )}
+
           {ex.note && (
             <span className={`mt-1.5 inline-block rounded-full px-2 py-0.5 text-[11px] font-semibold ${NOTE_STYLE[ex.note.tone]}`}>
               {ex.note.tone === 'warn' ? '⚠ ' : '✓ '}

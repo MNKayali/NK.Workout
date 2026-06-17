@@ -14,7 +14,7 @@ export default function Equipment() {
   const items = Object.values(EXERCISES).filter((e) => filter === 'all' || e.equipment === filter)
 
   return (
-    <div className="px-4 pt-12">
+    <div className="px-4 pt-5">
       <h1 className="mb-4 text-[28px] font-extrabold">Equipment</h1>
 
       <div className="mb-4 flex gap-2 overflow-x-auto pb-1">

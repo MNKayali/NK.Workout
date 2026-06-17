@@ -23,7 +23,7 @@ export default function Home() {
   }
 
   return (
-    <div className="px-4 pt-12">
+    <div className="px-4 pt-5">
       <header className="mb-5">
         <p className="text-sm font-medium text-ink-soft">
           {new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}

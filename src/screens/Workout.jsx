@@ -47,13 +47,10 @@ export default function Workout() {
 
   return (
     <div className="min-h-full pb-28">
-      <StickyProgress done={done} total={total} title={tpl.title} color={SESSION_COLOR[type]} />
+      <StickyProgress done={done} total={total} title={tpl.title} color={SESSION_COLOR[type]} onCancel={handleCancel} />
 
-      <div className="flex items-center justify-between px-4 pb-1 pt-3">
+      <div className="px-4 pb-1 pt-3">
         <p className="text-xs text-ink-soft">{tpl.subtitle}</p>
-        <button onClick={handleCancel} className="text-xs font-semibold text-ink-soft underline-offset-2 hover:underline">
-          Cancel
-        </button>
       </div>
 
       <div className="space-y-3 px-4 pt-1">
