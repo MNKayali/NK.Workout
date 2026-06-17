@@ -1,6 +1,9 @@
-// Consistent line-art illustration per exercise (no photos). Each exercise id maps
-// to a glyph drawn on a softly tinted panel. Accent tints both panel and strokes.
+// Per-exercise demonstration art. Prefers a real public-domain photo (see
+// data/exerciseMedia.js); falls back to a consistent line-art glyph on a softly tinted
+// panel when no photo is mapped. Accent tints both panel and strokes.
+import { useState } from 'react'
 import { getExercise } from '../data/exercises.js'
+import { getMedia } from '../data/exerciseMedia.js'
 
 const ACCENT = {
   blue: { line: '#007aff', wash1: '#eaf2ff', wash2: '#dcebff' },
@@ -198,13 +201,33 @@ function Glyph({ kind, c }) {
   }
 }
 
-export default function ExerciseIllustration({ exerciseId, accent, className = '' }) {
+// `variant`: 'thumb' (rounded square, default) or 'banner' (fills its container).
+export default function ExerciseIllustration({ exerciseId, accent, className = '', variant = 'thumb', photoIndex = 0 }) {
   const ex = getExercise(exerciseId)
   const accentKey = accent || GROUP_ACCENT[ex?.groups?.[0]] || 'blue'
   const c = ACCENT[accentKey] || ACCENT.blue
+  const media = getMedia(exerciseId)
+  const [imgFailed, setImgFailed] = useState(false)
+
+  // Real photo path.
+  if (media?.photo && !imgFailed) {
+    const src = photoIndex === 1 && media.photo2 ? media.photo2 : media.photo
+    const radius = variant === 'banner' ? '' : 'rounded-2xl'
+    return (
+      <img
+        src={src}
+        alt={ex?.name || 'exercise'}
+        loading="lazy"
+        onError={() => setImgFailed(true)}
+        className={`${className} object-cover ${radius}`}
+        style={{ backgroundColor: c.wash1 }}
+      />
+    )
+  }
+
+  // Figure / glyph fallback.
   const kind = GLYPH[exerciseId] || 'default'
   const gradId = `g_${exerciseId}`
-
   return (
     <svg viewBox="0 0 64 64" className={className} role="img" aria-label={ex?.name || 'exercise'}>
       <defs>
