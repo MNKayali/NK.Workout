@@ -12,6 +12,7 @@ export const SESSIONS = {
       'pec_dec',
       'lateral_raise',
       'tricep_pushdown',
+      'cable_crunch',
     ],
   },
   pull: {
