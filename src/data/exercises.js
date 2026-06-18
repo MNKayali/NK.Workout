@@ -18,7 +18,7 @@ export const EXERCISES = {
     step: 2,
     groups: ['chest', 'arms', 'shoulders'],
     regions: ['chest', 'triceps', 'shoulders'],
-    swaps: ['incline_db', 'pec_dec', 'smith_press', 'cable_fly'],
+    swaps: ['incline_db', 'pec_dec', 'smith_press', 'cable_fly', 'chest_press_machine'],
     tip: 'Flat back on bench, lower dumbbells to chest level, then press up and slightly inward.',
   },
   incline_db: {
@@ -33,7 +33,7 @@ export const EXERCISES = {
     step: 2,
     groups: ['chest', 'shoulders', 'arms'],
     regions: ['chest', 'shoulders', 'triceps'],
-    swaps: ['db_chest_press', 'pec_dec', 'smith_press'],
+    swaps: ['db_chest_press', 'pec_dec', 'smith_press', 'chest_press_machine'],
     tip: 'Bench at 30–45°. Press from shoulder height up and inward — targets the upper chest.',
   },
   overhead_press: {
@@ -63,7 +63,7 @@ export const EXERCISES = {
     step: 5,
     groups: ['chest'],
     regions: ['chest'],
-    swaps: ['cable_fly', 'db_chest_press', 'incline_db'],
+    swaps: ['cable_fly', 'db_chest_press', 'incline_db', 'chest_press_machine'],
     tip: 'Elbows at shoulder height, round arms forward and squeeze your chest hard at the midpoint.',
   },
   lateral_raise: {
@@ -272,6 +272,21 @@ export const EXERCISES = {
   },
 
   // ---- Swap-only alternatives ----
+  chest_press_machine: {
+    id: 'chest_press_machine',
+    name: 'Chest Press Machine',
+    machine: 'Leverage Chest Press',
+    equipment: 'machine',
+    sets: 3,
+    repRange: [10, 12],
+    defaultReps: 10,
+    defaultWeight: 40,
+    step: 5,
+    groups: ['chest', 'arms', 'shoulders'],
+    regions: ['chest', 'triceps', 'shoulders'],
+    swaps: ['db_chest_press', 'smith_press', 'pec_dec', 'cable_fly'],
+    tip: 'Adjust seat so handles are at chest height. Press forward to full extension, then return slowly.',
+  },
   smith_press: {
     id: 'smith_press',
     name: 'Smith Machine Bench Press',
@@ -284,7 +299,7 @@ export const EXERCISES = {
     step: 5,
     groups: ['chest', 'arms', 'shoulders'],
     regions: ['chest', 'triceps', 'shoulders'],
-    swaps: ['db_chest_press', 'pec_dec', 'cable_fly'],
+    swaps: ['db_chest_press', 'pec_dec', 'cable_fly', 'chest_press_machine'],
     tip: 'Lie on the bench, unrack the bar and lower to mid-chest. Press up in a controlled arc.',
   },
   cable_fly: {

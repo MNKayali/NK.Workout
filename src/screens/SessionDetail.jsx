@@ -5,7 +5,11 @@ import { SESSIONS, SESSION_COLOR } from '../data/sessions.js'
 import { getExercise } from '../data/exercises.js'
 import Card from '../components/Card.jsx'
 import ExerciseIllustration from '../components/ExerciseIllustration.jsx'
+import EquipmentChip from '../components/EquipmentChip.jsx'
 import SetRow from '../components/SetRow.jsx'
+
+const accentFor = (ex) =>
+  ex.groups[0] === 'legs' ? 'green' : ex.groups[0] === 'back' || ex.groups[0] === 'arms' ? 'orange' : 'blue'
 
 export default function SessionDetail() {
   const { id } = useParams()
@@ -50,10 +54,12 @@ export default function SessionDetail() {
           return (
             <Card key={`${entry.exerciseId}-${exIndex}`} className="p-3.5">
               <div className="mb-2.5 flex items-center gap-3">
-                <ExerciseIllustration exerciseId={entry.exerciseId} className="h-12 w-12 shrink-0" />
+                <ExerciseIllustration exerciseId={entry.exerciseId} accent={accentFor(ex)} className="h-14 w-14 shrink-0" />
                 <div className="min-w-0 flex-1">
-                  <div className="truncate text-sm font-bold">{ex.name}</div>
-                  <div className="truncate text-xs text-ink-soft">{ex.machine}</div>
+                  <div className="text-sm font-bold leading-tight">{ex.name}</div>
+                  <div className="mt-1">
+                    <EquipmentChip machine={ex.machine} accent={accentFor(ex)} />
+                  </div>
                 </div>
                 <button
                   onClick={() => removeSessionExercise(session.id, exIndex)}
