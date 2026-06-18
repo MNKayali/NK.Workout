@@ -22,6 +22,7 @@ export const EXERCISE_MEDIA = {
   ball_crunch: { source: 'Exercise Ball Crunch', photo: '/images/exercises/ball_crunch/0.jpg', photo2: '/images/exercises/ball_crunch/1.jpg' },
   cable_crunch: { source: 'Cable Crunch', photo: '/images/exercises/cable_crunch/0.jpg', photo2: '/images/exercises/cable_crunch/1.jpg' },
   arc: { source: 'Elliptical Trainer', photo: '/images/exercises/arc/0.jpg', photo2: '/images/exercises/arc/1.jpg' },
+  chest_press_machine: { source: 'Leverage Chest Press', photo: '/images/exercises/chest_press_machine/0.jpg', photo2: '/images/exercises/chest_press_machine/1.jpg' },
   smith_press: { source: 'Smith Machine Bench Press', photo: '/images/exercises/smith_press/0.jpg', photo2: '/images/exercises/smith_press/1.jpg' },
   cable_fly: { source: 'Cable Crossover', photo: '/images/exercises/cable_fly/0.jpg', photo2: '/images/exercises/cable_fly/1.jpg' },
 }
