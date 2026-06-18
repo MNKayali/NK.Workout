@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useWorkout } from '../store/WorkoutContext.jsx'
 import { SESSIONS, SESSION_COLOR } from '../data/sessions.js'
 import { getExercise } from '../data/exercises.js'
+import { estimateCalories } from '../lib/calories.js'
+import { fmtDuration } from '../lib/progress.js'
 import Card from '../components/Card.jsx'
 import ExerciseIllustration from '../components/ExerciseIllustration.jsx'
 import EquipmentChip from '../components/EquipmentChip.jsx'
@@ -14,7 +16,7 @@ const accentFor = (ex) =>
 export default function SessionDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { sessions, updateSessionSet, removeSessionExercise, deleteSession } = useWorkout()
+  const { sessions, updateSessionSet, removeSessionExercise, deleteSession, profile } = useWorkout()
   const session = sessions.find((s) => s.id === id)
 
   // Redirect if the session is gone (e.g. deleted, or all exercises removed).
@@ -24,6 +26,7 @@ export default function SessionDetail() {
   if (!session) return null
 
   const tpl = SESSIONS[session.type]
+  const calories = estimateCalories(session, profile)
   const handleDelete = () => {
     if (window.confirm('Delete this whole session?')) {
       deleteSession(session.id)
@@ -35,7 +38,7 @@ export default function SessionDetail() {
     <div className="px-4 pt-5 pb-8">
       <button onClick={() => navigate(-1)} className="mb-3 text-sm font-semibold text-blue">‹ Back</button>
 
-      <header className="mb-5 flex items-center gap-3">
+      <header className="mb-4 flex items-center gap-3">
         <span className="h-10 w-1.5 rounded-full" style={{ background: SESSION_COLOR[session.type] }} />
         <div>
           <h1 className="text-2xl font-extrabold">{tpl.title}</h1>
@@ -44,6 +47,30 @@ export default function SessionDetail() {
           </p>
         </div>
       </header>
+
+      {(session.durationSec || calories != null || !profile?.weightKg) && (
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          {session.durationSec ? (
+            <span className="rounded-full bg-surface px-3 py-1 text-xs font-semibold shadow-[var(--shadow-card)]">
+              <span className="text-ink-soft">Duration </span>
+              <span style={{ color: 'var(--color-blue)' }}>{fmtDuration(session.durationSec)}</span>
+            </span>
+          ) : null}
+          {calories != null ? (
+            <span className="rounded-full bg-surface px-3 py-1 text-xs font-semibold shadow-[var(--shadow-card)]">
+              <span className="text-ink-soft">Calories </span>
+              <span style={{ color: 'var(--color-green)' }}>~{calories} kcal</span>
+            </span>
+          ) : session.durationSec && !profile?.weightKg ? (
+            <button
+              onClick={() => navigate('/profile')}
+              className="rounded-full bg-surface px-3 py-1 text-xs font-medium text-ink-soft shadow-[var(--shadow-card)] active:scale-95 transition"
+            >
+              Add weight to see calories
+            </button>
+          ) : null}
+        </div>
+      )}
 
       <p className="mb-3 text-xs text-ink-soft">Edit weights or reps below — changes save automatically.</p>
 

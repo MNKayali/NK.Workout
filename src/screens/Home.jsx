@@ -24,11 +24,23 @@ export default function Home() {
 
   return (
     <div className="px-4 pt-5">
-      <header className="mb-5">
-        <p className="text-sm font-medium text-ink-soft">
-          {new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
-        </p>
-        <h1 className="text-[28px] font-extrabold leading-tight">Hi Nabil 👋</h1>
+      <header className="mb-5 flex items-start justify-between">
+        <div>
+          <p className="text-sm font-medium text-ink-soft">
+            {new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
+          </p>
+          <h1 className="text-[28px] font-extrabold leading-tight">Hi Nabil 👋</h1>
+        </div>
+        <button
+          onClick={() => navigate('/profile')}
+          aria-label="Profile"
+          className="mt-1 grid h-9 w-9 place-items-center rounded-full bg-surface text-ink-soft shadow-[var(--shadow-card)] active:scale-95 transition"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+          </svg>
+        </button>
       </header>
 
       <StatStrip total={sessions.length} thisWeek={thisWeek} goal={3} />

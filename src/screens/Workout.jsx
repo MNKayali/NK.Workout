@@ -6,6 +6,7 @@ import { getExercise } from '../data/exercises.js'
 import ExerciseCard from '../components/ExerciseCard.jsx'
 import StickyProgress from '../components/StickyProgress.jsx'
 import StickyFooter from '../components/StickyFooter.jsx'
+import useElapsed from '../hooks/useElapsed.js'
 
 export default function Workout() {
   const { type } = useParams()
@@ -30,6 +31,8 @@ export default function Workout() {
   const done = allSets.filter((s) => s.done).length
   const total = allSets.length
 
+  const elapsed = useElapsed(draft?.startedAt)
+
   const currentEntry =
     draft.exercises.find((e) => e.sets.some((s) => !s.done)) ||
     draft.exercises[draft.exercises.length - 1]
@@ -47,7 +50,7 @@ export default function Workout() {
 
   return (
     <div className="min-h-full pb-28">
-      <StickyProgress done={done} total={total} title={tpl.title} color={SESSION_COLOR[type]} onCancel={handleCancel} />
+      <StickyProgress done={done} total={total} title={tpl.title} color={SESSION_COLOR[type]} onCancel={handleCancel} elapsed={elapsed} />
 
       <div className="px-4 pb-1 pt-3">
         <p className="text-xs text-ink-soft">{tpl.subtitle}</p>

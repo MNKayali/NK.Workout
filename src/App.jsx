@@ -6,6 +6,7 @@ import Progress from './screens/Progress.jsx'
 import Muscles from './screens/Muscles.jsx'
 import Equipment from './screens/Equipment.jsx'
 import SessionDetail from './screens/SessionDetail.jsx'
+import Profile from './screens/Profile.jsx'
 
 export default function App() {
   const { pathname } = useLocation()
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/muscles" element={<Muscles />} />
         <Route path="/equipment" element={<Equipment />} />
         <Route path="/session/:id" element={<SessionDetail />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<Home />} />
       </Routes>
       {!hideNav && <div className="h-[calc(5rem+env(safe-area-inset-bottom))]" aria-hidden />}

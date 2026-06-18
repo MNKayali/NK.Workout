@@ -1,8 +1,10 @@
 // − / + weight stepper (no typing). `unit` defaults to kg.
 export default function WeightStepper({ value, step = 2.5, min = 0, onChange, unit = 'kg' }) {
   const fmt = (n) => (Number.isInteger(n) ? n : Number(n.toFixed(1)))
-  const dec = () => onChange(Math.max(min, fmt(value - step)))
-  const inc = () => onChange(fmt(value + step))
+  // Snap to the gym's real plate/dumbbell grid (2.5 / 5 / 7.5 …): step to the
+  // next grid point in each direction, correcting any off-grid history (16 → 15 / 17.5).
+  const dec = () => onChange(Math.max(min, fmt(Math.ceil(value / step - 1) * step)))
+  const inc = () => onChange(fmt(Math.floor(value / step + 1) * step))
 
   return (
     <div className="flex items-center gap-2">

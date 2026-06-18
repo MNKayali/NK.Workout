@@ -2,6 +2,7 @@ import { SESSIONS, getSessionTemplate } from '../data/sessions.js'
 import { EXERCISES, getExercise } from '../data/exercises.js'
 
 export const STORAGE_KEY = 'nk_gym_v3'
+export const PROFILE_KEY = 'nk_gym_profile'
 
 const EMPTY = { sessions: [] }
 
@@ -27,6 +28,26 @@ export function saveState(state) {
 
 export function newId() {
   return `s_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`
+}
+
+// User profile for BMI/BMR and calorie estimates. All fields optional until set.
+// Shape: { weightKg, heightCm, age, sex: 'male' | 'female' }
+export function loadProfile() {
+  try {
+    const raw = localStorage.getItem(PROFILE_KEY)
+    const parsed = raw ? JSON.parse(raw) : null
+    return parsed && typeof parsed === 'object' ? parsed : {}
+  } catch {
+    return {}
+  }
+}
+
+export function saveProfile(profile) {
+  try {
+    localStorage.setItem(PROFILE_KEY, JSON.stringify(profile))
+  } catch {
+    /* quota / private mode — ignore */
+  }
 }
 
 // Most recent saved session of a given type (push/pull/legs), or null.
@@ -61,6 +82,7 @@ export function buildWorkoutDraft(state, type) {
   return {
     type,
     date: new Date().toISOString(),
+    startedAt: new Date().toISOString(),
     exercises: template.exercises.map((exerciseId) => {
       const ex = getExercise(exerciseId)
       const prior = lastLogForExercise(state, exerciseId)

@@ -3,6 +3,7 @@ import { getExercise } from '../data/exercises.js'
 // Bar chart of top working weight per session for one exercise (last 8 sessions).
 export default function StrengthChart({ sessions, exerciseId }) {
   const ex = getExercise(exerciseId)
+  if (!ex) return null
   const points = sessions
     .filter((s) => s.exercises.some((e) => e.exerciseId === exerciseId))
     .sort((a, b) => new Date(a.date) - new Date(b.date))

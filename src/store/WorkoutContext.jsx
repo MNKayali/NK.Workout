@@ -5,6 +5,8 @@ import {
   newId,
   buildWorkoutDraft,
   lastLogForExercise,
+  loadProfile,
+  saveProfile,
 } from '../lib/storage.js'
 import { getExercise } from '../data/exercises.js'
 
@@ -66,9 +68,15 @@ function reducer(state, action) {
 
     case 'FINISH_WORKOUT': {
       if (!state.draft) return state
-      const session = { id: newId(), ...state.draft }
-      return { sessions: [session, ...state.sessions], draft: null }
+      const startedAt = state.draft.startedAt || state.draft.date
+      const endedAt = new Date().toISOString()
+      const durationSec = Math.max(0, Math.round((new Date(endedAt) - new Date(startedAt)) / 1000))
+      const session = { id: newId(), ...state.draft, endedAt, durationSec }
+      return { ...state, sessions: [session, ...state.sessions], draft: null }
     }
+
+    case 'SET_PROFILE':
+      return { ...state, profile: { ...state.profile, ...action.patch } }
 
     case 'DELETE_SESSION':
       return {
@@ -115,7 +123,7 @@ function reducer(state, action) {
 
 function init() {
   const persisted = loadState()
-  return { sessions: persisted.sessions, draft: loadDraft() }
+  return { sessions: persisted.sessions, draft: loadDraft(), profile: loadProfile() }
 }
 
 export function WorkoutProvider({ children }) {
@@ -135,10 +143,16 @@ export function WorkoutProvider({ children }) {
     }
   }, [state.draft])
 
+  useEffect(() => {
+    saveProfile(state.profile)
+  }, [state.profile])
+
   const value = useMemo(
     () => ({
       sessions: state.sessions,
       draft: state.draft,
+      profile: state.profile,
+      setProfile: (patch) => dispatch({ type: 'SET_PROFILE', patch }),
       startWorkout: (workoutType) => dispatch({ type: 'START_WORKOUT', workoutType }),
       discardDraft: () => dispatch({ type: 'DISCARD_DRAFT' }),
       updateDraftSet: (exIndex, setIndex, patch) =>
@@ -152,7 +166,7 @@ export function WorkoutProvider({ children }) {
       removeSessionExercise: (sessionId, exIndex) =>
         dispatch({ type: 'REMOVE_SESSION_EXERCISE', sessionId, exIndex }),
     }),
-    [state.sessions, state.draft],
+    [state.sessions, state.draft, state.profile],
   )
 
   return <WorkoutContext.Provider value={value}>{children}</WorkoutContext.Provider>

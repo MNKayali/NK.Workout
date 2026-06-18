@@ -1,4 +1,10 @@
-export default function StickyProgress({ done, total, title, color = 'var(--color-blue)', onCancel }) {
+function fmtElapsed(sec) {
+  const m = Math.floor(sec / 60)
+  const s = sec % 60
+  return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
+}
+
+export default function StickyProgress({ done, total, title, color = 'var(--color-blue)', onCancel, elapsed }) {
   const pct = total ? Math.round((done / total) * 100) : 0
   return (
     <div
@@ -9,6 +15,9 @@ export default function StickyProgress({ done, total, title, color = 'var(--colo
         <div className="flex items-center justify-between text-sm">
           <span className="font-bold">{title}</span>
           <div className="flex items-center gap-3">
+            {elapsed != null && (
+              <span className="font-mono text-xs tabular-nums text-ink-soft">{fmtElapsed(elapsed)}</span>
+            )}
             <span className="font-semibold text-ink-soft">{done}/{total} sets</span>
             {onCancel && (
               <button
