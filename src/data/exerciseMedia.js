@@ -25,6 +25,7 @@ export const EXERCISE_MEDIA = {
   chest_press_machine: { source: 'Leverage Chest Press', photo: '/images/exercises/chest_press_machine/0.jpg', photo2: '/images/exercises/chest_press_machine/1.jpg' },
   smith_press: { source: 'Smith Machine Bench Press', photo: '/images/exercises/smith_press/0.jpg', photo2: '/images/exercises/smith_press/1.jpg' },
   cable_fly: { source: 'Cable Crossover', photo: '/images/exercises/cable_fly/0.jpg', photo2: '/images/exercises/cable_fly/1.jpg' },
+  russian_twist: { source: 'Russian Twist', photo: '/images/exercises/russian_twist/0.jpg', photo2: '/images/exercises/russian_twist/1.jpg' },
 }
 
 export const getMedia = (id) => EXERCISE_MEDIA[id] || null

@@ -236,7 +236,7 @@ export const EXERCISES = {
     bodyweight: true,
     groups: ['core'],
     regions: ['abs'],
-    swaps: ['cable_crunch'],
+    swaps: ['cable_crunch', 'russian_twist'],
     tip: 'Lower back on the ball, hands lightly behind head. Crunch up and squeeze your abs at the top.',
   },
   cable_crunch: {
@@ -269,6 +269,22 @@ export const EXERCISES = {
     regions: ['quads', 'hamstrings', 'calves'],
     swaps: [],
     tip: 'Set resistance and incline. Stay upright and drive through the full low-impact stride.',
+  },
+
+  russian_twist: {
+    id: 'russian_twist',
+    name: 'Russian Twist',
+    machine: 'Medicine Ball',
+    equipment: 'free',
+    sets: 3,
+    repRange: [15, 20],
+    defaultReps: 15,
+    defaultWeight: 5,
+    step: 2.5,
+    groups: ['core'],
+    regions: ['obliques', 'abs'],
+    swaps: ['ball_crunch', 'cable_crunch'],
+    tip: 'Sit with knees bent, lean back slightly, rotate the ball side to side keeping core tight.',
   },
 
   // ---- Swap-only alternatives ----

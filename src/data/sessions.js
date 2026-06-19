@@ -40,6 +40,7 @@ export const SESSIONS = {
       'leg_ext',
       'ball_crunch',
       'cable_crunch',
+      'russian_twist',
       'arc',
     ],
   },
