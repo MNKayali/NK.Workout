@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useWorkout } from '../store/WorkoutContext.jsx'
-import { SESSIONS, SESSION_COLOR } from '../data/sessions.js'
+import { SESSIONS, SESSION_COLOR, SESSION_ORDER } from '../data/sessions.js'
 import { getExercise } from '../data/exercises.js'
 import { startOfWeek } from '../lib/recovery.js'
 import { totalVolume, totalDuration, currentStreak, fmtDuration, bestWeight, suggestNextWeight } from '../lib/progress.js'
@@ -37,9 +38,22 @@ function fmtVol(kg) {
   return `${kg}kg`
 }
 
+// Returns the session type (push/pull/legs) that an exercise most commonly appears in.
+function sessionTypeFor(sessions, exerciseId) {
+  const counts = {}
+  for (const s of sessions) {
+    if (s.exercises.some((e) => e.exerciseId === exerciseId)) {
+      counts[s.type] = (counts[s.type] || 0) + 1
+    }
+  }
+  const entries = Object.entries(counts).sort((a, b) => b[1] - a[1])
+  return entries[0]?.[0] ?? null
+}
+
 export default function Progress() {
   const { sessions, profile } = useWorkout()
   const navigate = useNavigate()
+  const [metric, setMetric] = useState('weight')
 
   const weekStart = startOfWeek()
   const thisWeek = sessions.filter((s) => new Date(s.date) >= weekStart).length
@@ -158,13 +172,47 @@ export default function Progress() {
       {/* Strength charts */}
       {trackedIds.length > 0 && (
         <>
-          <h2 className="mb-2.5 text-lg font-bold">Strength trend</h2>
-          <div className="mb-5 space-y-3">
-            {trackedIds.map((id) => (
-              <Card key={id} className="p-4">
-                <StrengthChart sessions={sessions} exerciseId={id} />
-              </Card>
-            ))}
+          <div className="mb-3 flex items-center justify-between">
+            <h2 className="text-lg font-bold">Strength trend</h2>
+            <div className="flex rounded-full bg-surface p-0.5 shadow-[var(--shadow-card)]">
+              {['weight', 'volume'].map((m) => (
+                <button
+                  key={m}
+                  onClick={() => setMetric(m)}
+                  className="rounded-full px-3 py-1 text-xs font-semibold capitalize transition"
+                  style={
+                    metric === m
+                      ? { background: 'var(--color-blue)', color: '#fff' }
+                      : { color: 'var(--color-ink-soft)' }
+                  }
+                >
+                  {m}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="mb-5 space-y-5">
+            {SESSION_ORDER.map((type) => {
+              const ids = trackedIds.filter((id) => sessionTypeFor(sessions, id) === type)
+              if (ids.length === 0) return null
+              return (
+                <div key={type}>
+                  <h3
+                    className="mb-2 text-sm font-bold uppercase tracking-wide"
+                    style={{ color: SESSION_COLOR[type] }}
+                  >
+                    {SESSIONS[type].title}
+                  </h3>
+                  <div className="space-y-3">
+                    {ids.map((id) => (
+                      <Card key={id} className="p-4">
+                        <StrengthChart sessions={sessions} exerciseId={id} metric={metric} />
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </>
       )}

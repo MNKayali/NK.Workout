@@ -69,6 +69,13 @@ export function bestWeight(sessions, exerciseId) {
   return best
 }
 
+// Total volume lifted for one exercise in one session (Σ weight×reps for done sets).
+export function sessionVolume(session, exerciseId) {
+  const entry = session.exercises.find((e) => e.exerciseId === exerciseId)
+  if (!entry) return 0
+  return Math.round(entry.sets.filter((s) => s.done).reduce((sum, s) => sum + s.weight * s.reps, 0))
+}
+
 // Progressive-overload suggestion based on the most recent session for an exercise.
 // Returns { tone: 'up' | 'hold' | 'build', text, nextWeight? } or null.
 export function suggestNextWeight(sessions, exerciseId) {
