@@ -26,6 +26,11 @@ export const EXERCISE_MEDIA = {
   smith_press: { source: 'Smith Machine Bench Press', photo: '/images/exercises/smith_press/0.jpg', photo2: '/images/exercises/smith_press/1.jpg' },
   cable_fly: { source: 'Cable Crossover', photo: '/images/exercises/cable_fly/0.jpg', photo2: '/images/exercises/cable_fly/1.jpg' },
   russian_twist: { source: 'Russian Twist', photo: '/images/exercises/russian_twist/0.jpg', photo2: '/images/exercises/russian_twist/1.jpg' },
+  reverse_pec_dec: { source: 'Reverse Machine Flyes', photo: '/images/exercises/reverse_pec_dec/0.jpg', photo2: '/images/exercises/reverse_pec_dec/1.jpg' },
+  rear_delt_fly: { source: 'Seated Bent-Over Rear Delt Raise', photo: '/images/exercises/rear_delt_fly/0.jpg', photo2: '/images/exercises/rear_delt_fly/1.jpg' },
+  hip_thrust: { source: 'Barbell Hip Thrust', photo: '/images/exercises/hip_thrust/0.jpg', photo2: '/images/exercises/hip_thrust/1.jpg' },
+  calf_raise: { source: 'Standing Calf Raises', photo: '/images/exercises/calf_raise/0.jpg', photo2: '/images/exercises/calf_raise/1.jpg' },
+  glute_bridge: { source: 'Butt Lift (Bridge)', photo: '/images/exercises/glute_bridge/0.jpg', photo2: '/images/exercises/glute_bridge/1.jpg' },
 }
 
 export const getMedia = (id) => EXERCISE_MEDIA[id] || null
