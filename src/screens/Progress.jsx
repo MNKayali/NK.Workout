@@ -192,9 +192,17 @@ export default function Progress() {
                   <div className="text-xs text-ink-soft">
                     {fmtDay(s.date)}
                     {s.durationSec ? ` · ${fmtDuration(s.durationSec)}` : ''}
-                    {cal != null ? ` · ~${cal} kcal` : ''}
                   </div>
                 </div>
+                {cal != null ? (
+                  <span className="shrink-0 rounded-full bg-orange/10 px-2.5 py-1 text-xs font-bold" style={{ color: 'var(--color-orange)' }}>
+                    ~{cal} kcal
+                  </span>
+                ) : !profile?.weightKg ? (
+                  <span className="shrink-0 text-center text-[10px] leading-tight text-ink-soft/60">
+                    Add weight<br />for cal
+                  </span>
+                ) : null}
                 <span className="shrink-0 text-ink-soft/50">›</span>
               </Card>
             )

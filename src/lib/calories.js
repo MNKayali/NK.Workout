@@ -19,6 +19,21 @@ function cardioMinutes(session) {
   return mins
 }
 
+// Fallback duration estimate when the session wasn't timed: ~2 min per strength set
+// (30 s effort + 90 s rest) + actual cardio minutes.
+function estimateDurationFallback(session) {
+  let totalMin = 0
+  for (const entry of session.exercises) {
+    const ex = getExercise(entry.exerciseId)
+    if (!ex) continue
+    for (const set of entry.sets) {
+      if (!set.done) continue
+      totalMin += ex.cardio ? Number(set.reps) || 0 : 2
+    }
+  }
+  return totalMin > 0 ? totalMin : null
+}
+
 // Estimated calories burned for a session. Needs bodyweight + a duration.
 // Splits time into cardio minutes (MET 7) and the remaining strength time (MET 5):
 //   kcal = MET × weightKg × hours. Returns null when we can't estimate.
@@ -26,7 +41,9 @@ export function estimateCalories(session, profile) {
   const weightKg = Number(profile?.weightKg)
   if (!weightKg || !session) return null
 
-  const totalMin = session.durationSec ? session.durationSec / 60 : null
+  const totalMin = session.durationSec
+    ? session.durationSec / 60
+    : estimateDurationFallback(session)
   if (!totalMin) return null
 
   const cardioMin = Math.min(cardioMinutes(session), totalMin)
