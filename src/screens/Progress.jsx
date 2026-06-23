@@ -172,7 +172,7 @@ export default function Progress() {
       {/* Strength charts */}
       {trackedIds.length > 0 && (
         <>
-          <div className="mb-3 flex items-center justify-between">
+          <div className="mb-2 flex items-center justify-between">
             <h2 className="text-lg font-bold">Strength trend</h2>
             <div className="flex rounded-full bg-surface p-0.5 shadow-[var(--shadow-card)]">
               {['weight', 'volume'].map((m) => (
@@ -191,7 +191,22 @@ export default function Progress() {
               ))}
             </div>
           </div>
-          <div className="mb-5 space-y-5">
+          {/* Legend */}
+          <div className="mb-3 flex gap-3 text-[10px] text-ink-soft">
+            <span className="flex items-center gap-1">
+              <span className="inline-block h-2 w-2 rounded-sm" style={{ background: 'var(--color-green)' }} />
+              PR
+            </span>
+            <span className="flex items-center gap-1">
+              <span className="inline-block h-2 w-2 rounded-sm" style={{ background: 'var(--color-blue)' }} />
+              Latest
+            </span>
+            <span className="flex items-center gap-1">
+              <span className="inline-block h-2 w-2 rounded-sm bg-[#c9d6e8]" />
+              Previous
+            </span>
+          </div>
+          <div className="mb-5 space-y-4">
             {SESSION_ORDER.map((type) => {
               const ids = trackedIds.filter((id) => sessionTypeFor(sessions, id) === type)
               if (ids.length === 0) return null
@@ -203,9 +218,9 @@ export default function Progress() {
                   >
                     {SESSIONS[type].title}
                   </h3>
-                  <div className="space-y-3">
+                  <div className="grid grid-cols-2 gap-2">
                     {ids.map((id) => (
-                      <Card key={id} className="p-4">
+                      <Card key={id} className="p-3">
                         <StrengthChart sessions={sessions} exerciseId={id} metric={metric} />
                       </Card>
                     ))}

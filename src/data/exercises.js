@@ -299,7 +299,7 @@ export const EXERCISES = {
     groups: ['legs'],
     regions: ['glutes', 'hamstrings'],
     note: { tone: 'safe', text: 'Knee-safe glutes' },
-    swaps: ['glute_bridge', 'leg_press'],
+    swaps: ['glute_bridge'],
     tip: 'Upper back on the bench, bar across hips, drive through your heels and squeeze your glutes hard at the top.',
   },
   calf_raise: {
