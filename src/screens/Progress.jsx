@@ -7,6 +7,7 @@ import { startOfWeek } from '../lib/recovery.js'
 import { totalVolume, totalDuration, currentStreak, fmtDuration, bestWeight, suggestNextWeight } from '../lib/progress.js'
 import { estimateCalories } from '../lib/calories.js'
 import Card from '../components/Card.jsx'
+import AICoach from '../components/AICoach.jsx'
 import Calendar from '../components/Calendar.jsx'
 import StrengthChart from '../components/StrengthChart.jsx'
 import ExerciseIllustration from '../components/ExerciseIllustration.jsx'
@@ -123,6 +124,9 @@ export default function Progress() {
           />
         </div>
       </Card>
+
+      {/* AI Coach */}
+      <AICoach />
 
       {/* Calendar */}
       <Card className="mb-5 p-4">

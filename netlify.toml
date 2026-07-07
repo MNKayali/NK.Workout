@@ -2,6 +2,12 @@
   command = "npm run build"
   publish = "dist"
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Serverless function routes are served before this SPA catch-all, so the
+# /.netlify/functions/* endpoints keep working.
 [[redirects]]
   from = "/*"
   to = "/index.html"

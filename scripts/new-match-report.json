@@ -1,0 +1,42 @@
+{
+  "trx_row": {
+    "name": "Suspended Row",
+    "photo": "/images/exercises/trx_row/0.jpg",
+    "photo2": "/images/exercises/trx_row/1.jpg"
+  },
+  "trx_chest_press": {
+    "name": "Suspended Push-Up",
+    "photo": "/images/exercises/trx_chest_press/0.jpg",
+    "photo2": "/images/exercises/trx_chest_press/1.jpg"
+  },
+  "trx_y_fly": {
+    "name": "Suspended Fallout",
+    "photo": "/images/exercises/trx_y_fly/0.jpg",
+    "photo2": "/images/exercises/trx_y_fly/1.jpg"
+  },
+  "trx_ham_curl": {
+    "name": "Ball Leg Curl",
+    "photo": "/images/exercises/trx_ham_curl/0.jpg",
+    "photo2": "/images/exercises/trx_ham_curl/1.jpg"
+  },
+  "knee_raise": {
+    "name": "Hanging Leg Raise",
+    "photo": "/images/exercises/knee_raise/0.jpg",
+    "photo2": "/images/exercises/knee_raise/1.jpg"
+  },
+  "dip": {
+    "name": "Dips - Triceps Version",
+    "photo": "/images/exercises/dip/0.jpg",
+    "photo2": "/images/exercises/dip/1.jpg"
+  },
+  "bosu_crunch": {
+    "name": "Crunches",
+    "photo": "/images/exercises/bosu_crunch/0.jpg",
+    "photo2": "/images/exercises/bosu_crunch/1.jpg"
+  },
+  "slant_calf_raise": {
+    "name": "Standing Calf Raises",
+    "photo": "/images/exercises/slant_calf_raise/0.jpg",
+    "photo2": "/images/exercises/slant_calf_raise/1.jpg"
+  }
+}

@@ -15,7 +15,13 @@ export default function Muscles() {
   const trainedRegions = new Set()
   sessions
     .filter((s) => new Date(s.date) >= weekStart)
-    .forEach((s) => s.exercises.forEach((e) => getExercise(e.exerciseId)?.regions.forEach((r) => trainedRegions.add(r))))
+    .forEach((s) =>
+      s.exercises.forEach((e) => {
+        const ex = getExercise(e.exerciseId)
+        if (ex?.cardio) return // cardio finishers don't count as resistance work
+        ex?.regions.forEach((r) => trainedRegions.add(r))
+      }),
+    )
 
   const snapshot = recoverySnapshot(sessions)
   const ranked = recommendSessions(sessions)
