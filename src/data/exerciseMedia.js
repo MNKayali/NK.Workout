@@ -31,6 +31,13 @@ export const EXERCISE_MEDIA = {
   hip_thrust: { source: 'Barbell Hip Thrust', photo: '/images/exercises/hip_thrust/0.jpg', photo2: '/images/exercises/hip_thrust/1.jpg' },
   calf_raise: { source: 'Standing Calf Raises', photo: '/images/exercises/calf_raise/0.jpg', photo2: '/images/exercises/calf_raise/1.jpg' },
   glute_bridge: { source: 'Butt Lift (Bridge)', photo: '/images/exercises/glute_bridge/0.jpg', photo2: '/images/exercises/glute_bridge/1.jpg' },
+  trx_row: { source: 'Suspended Row', photo: '/images/exercises/trx_row/0.jpg', photo2: '/images/exercises/trx_row/1.jpg' },
+  trx_chest_press: { source: 'Suspended Push-Up', photo: '/images/exercises/trx_chest_press/0.jpg', photo2: '/images/exercises/trx_chest_press/1.jpg' },
+  trx_ham_curl: { source: 'Ball Leg Curl', photo: '/images/exercises/trx_ham_curl/0.jpg', photo2: '/images/exercises/trx_ham_curl/1.jpg' },
+  knee_raise: { source: 'Hanging Leg Raise', photo: '/images/exercises/knee_raise/0.jpg', photo2: '/images/exercises/knee_raise/1.jpg' },
+  dip: { source: 'Dips - Triceps Version', photo: '/images/exercises/dip/0.jpg', photo2: '/images/exercises/dip/1.jpg' },
+  bosu_crunch: { source: 'Crunches', photo: '/images/exercises/bosu_crunch/0.jpg', photo2: '/images/exercises/bosu_crunch/1.jpg' },
+  slant_calf_raise: { source: 'Standing Calf Raises', photo: '/images/exercises/slant_calf_raise/0.jpg', photo2: '/images/exercises/slant_calf_raise/1.jpg' },
 }
 
 export const getMedia = (id) => EXERCISE_MEDIA[id] || null

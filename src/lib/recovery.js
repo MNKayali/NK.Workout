@@ -5,10 +5,13 @@ import { SESSIONS } from '../data/sessions.js'
 const HOUR = 1000 * 60 * 60
 
 // Groups worked in a saved session (union of its exercises' groups).
+// Cardio finishers (e.g. the Arc Trainer) are excluded — a low-impact cardio
+// finisher shouldn't register the target muscles as resistance-trained/fatigued.
 export function groupsWorkedIn(session) {
   const set = new Set()
   session.exercises.forEach((e) => {
     const ex = getExercise(e.exerciseId)
+    if (ex?.cardio) return
     ex?.groups.forEach((g) => set.add(g))
   })
   return set
@@ -57,23 +60,28 @@ export function groupsTrainedThisWeek(sessions, now = new Date()) {
   return set
 }
 
-// Rank the 3 day templates by how much their target muscles need work.
-// Score = sum over the session's groups of (100 - recovery%); higher = more recommended.
+// Rank the 3 day templates by how recovered their target muscles are.
+// Best pick = the session whose muscles are, on average, most recovered (highest
+// avgReady). Cardio finishers are excluded so the readiness reflects the muscles the
+// session actually resistance-trains.
 export function recommendSessions(sessions, now = new Date()) {
   const snap = recoverySnapshot(sessions, now)
   const pctById = Object.fromEntries(snap.map((s) => [s.id, s.pct]))
   return Object.values(SESSIONS)
     .map((tpl) => {
       const groups = new Set()
-      tpl.exercises.forEach((id) => getExercise(id)?.groups.forEach((g) => groups.add(g)))
+      tpl.exercises.forEach((id) => {
+        const ex = getExercise(id)
+        if (ex?.cardio) return
+        ex?.groups.forEach((g) => groups.add(g))
+      })
       const groupArr = [...groups]
-      const score = groupArr.reduce((sum, g) => sum + (100 - (pctById[g] ?? 100)), 0)
       const avgReady = groupArr.length
         ? Math.round(groupArr.reduce((s, g) => s + (pctById[g] ?? 100), 0) / groupArr.length)
         : 100
-      return { type: tpl.type, title: tpl.title, color: tpl.color, score, avgReady }
+      return { type: tpl.type, title: tpl.title, color: tpl.color, avgReady }
     })
-    .sort((a, b) => b.score - a.score)
+    .sort((a, b) => b.avgReady - a.avgReady)
 }
 
 export function startOfWeek(d = new Date()) {
