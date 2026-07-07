@@ -3,6 +3,7 @@ import ExerciseIllustration from './ExerciseIllustration.jsx'
 import EquipmentChip from './EquipmentChip.jsx'
 import BodyDiagram from './BodyDiagram.jsx'
 import SetRow from './SetRow.jsx'
+import ProgressArrow from './ProgressArrow.jsx'
 import { getExercise } from '../data/exercises.js'
 import { getMedia } from '../data/exerciseMedia.js'
 
@@ -44,7 +45,10 @@ export default function ExerciseCard({ entry, exIndex, onSetChange, onSwap }) {
           )}
           <div className="min-w-0 flex-1">
             <div className="flex items-start justify-between gap-2">
-              <h3 className="text-[15px] font-bold leading-tight">{ex.name}</h3>
+              <div className="flex min-w-0 items-center gap-1.5">
+                <h3 className="truncate text-[15px] font-bold leading-tight">{ex.name}</h3>
+                <ProgressArrow exerciseId={entry.exerciseId} />
+              </div>
               {!hasPhoto && (
                 <span className="shrink-0 rounded-full bg-canvas px-2 py-0.5 text-[11px] font-semibold text-ink-soft">
                   {doneCount}/{entry.sets.length}
